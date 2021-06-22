@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+
+            td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+            }
+
+            tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+        </style>
+    </head>
+<body>
+
+<h2>Students List</h2>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Student Name</th>
+    <th>Teachers</th>
+    <th>Subjects</th>
+  </tr>
+    {% for object in objects %}
+  <tr>
+
+    <td>{{object.id}}</td>
+    <td>{{object.student_name|title}}</td>
+    <td>{% for teacher in object.teachers.all %} {{ teacher.name|title }}{% if not forloop.last %},{%else%}{% endif%} {% endfor %}</td>
+    <td>{% for teacher in object.teachers.all %}{% for subject in teacher.subjects.all %}  {{ subject.name| title }}{% if not forloop.last %},{% endif %} {% endfor %}{% endfor %}</td>
+  </tr>
+    {%endfor%}
+  
+</table>
+
+</body>
+</html>
