@@ -18,29 +18,41 @@
               background-color: #dddddd;
             }
         </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 <body>
 
 <h2>Students List</h2>
-
+<a href="#" class="yourlink">Download</a>
 <table>
   <tr>
     <th>ID</th>
     <th>Student Name</th>
     <th>Teachers</th>
     <th>Subjects</th>
+    <th>Detail</th>
+
   </tr>
-    {% for object in objects %}
+    {% for object in object_list %}
   <tr>
 
     <td>{{object.id}}</td>
     <td>{{object.student_name|title}}</td>
     <td>{% for teacher in object.teachers.all %} {{ teacher.name|title }}{% if not forloop.last %},{%else%}{% endif%} {% endfor %}</td>
     <td>{% for teacher in object.teachers.all %}{% for subject in teacher.subjects.all %}  {{ subject.name| title }}{% if not forloop.last %},{% endif %} {% endfor %}{% endfor %}</td>
+  <td><a href="{% url 'student_detail'  object.id %}">detail</a></td>
   </tr>
     {%endfor%}
   
 </table>
 
 </body>
+<script type="text/javascript">
+  $('a.yourlink').click(function(e) {
+    debugger
+    e.preventDefault();
+    window.open('http://127.0.0.1:8000/media/1.png');
+    
+});
+</script>
 </html>
