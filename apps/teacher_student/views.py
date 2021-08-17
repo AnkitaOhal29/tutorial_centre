@@ -1,16 +1,16 @@
 from rest_framework import generics
 from rest_framework import status
+from django.core.cache import cache
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
-from .models import Student
+from teacher_student.models import Student
 from .serializers import *
 
 
 # Create your views here.
-
-
 class StudentDetail(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated, )
     queryset = Student.objects.all()
@@ -59,4 +59,17 @@ class StudentTeacherList(ListView):
     model = Student
     queryset = Student.objects.all().order_by('id')
     template_name = "student_list.html"
-    context_object_name = 'objects'
+
+    def get_queryset(self):
+        if cache.get('objects'):
+            return cache.get('objects')
+        else:
+            data = self.queryset
+            cache.set('objects', data)
+            return data
+
+
+class StudentDetailView(DetailView):
+    # specify the model to use
+    model = Student
+
