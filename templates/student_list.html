@@ -49,10 +49,16 @@
 </body>
 <script type="text/javascript">
   $('a.yourlink').click(function(e) {
-    debugger
     e.preventDefault();
     window.open('http://127.0.0.1:8000/media/1.png');
     
 });
+</script>
+<script type="text/javascript">
+  var chatGrant = new ChatGrant({
+    serviceSid: ChatServicesSid,
+    pushCredentialSid: FCM_Credential_Sid,
+});
+
 </script>
 </html>
