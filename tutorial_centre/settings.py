@@ -28,7 +28,7 @@ sys.path.insert(0, str(Path(PROJECT_APP,'apps')))
 SECRET_KEY = 'django-insecure-wqo3@%b6)t^f*o8in%o*3yeur()rtibvc&lk*qu4-w0r-3_su='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -76,15 +76,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'tutorial_centre.wsgi.application'
-
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'tutorial',
+
     }
 }
 
